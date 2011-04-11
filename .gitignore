@@ -1,3 +1,4 @@
 *.pyc
 Paper/
 Algorithms/test_data/
+*.wav
