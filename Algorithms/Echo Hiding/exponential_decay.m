@@ -1,14 +1,12 @@
 function [ processed_wave ] = exponential_decay( wav, Fs, time, decay )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-    if time > 10
-        % time is probably in ms... so treat it as such
-        time = time / 1000;
-    end
+    time = time / 1000;
     processed_wave = wav;
-    N = (time)*Fs;
-    for n=N+1:length(wav),
-        processed_wave(n) = (decay * processed_wave(n-N)) + wav(n);
+    N = round((time)*Fs);
+    for d=1:size(wav,2),
+        for n=N+1:length(wav),
+            processed_wave(n,d) = (decay * processed_wave(n-N,d)) + wav(n,d);
+        end
     end
-
 end

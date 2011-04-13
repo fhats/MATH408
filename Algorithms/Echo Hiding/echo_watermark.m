@@ -5,9 +5,22 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     zero_delay_signal = single_echo(wav, Fs, zero_delay, decay_rate);
     one_delay_signal = single_echo(wav, Fs, one_delay, decay_rate);
     
+    zero_delay = zero_delay / 1000;
+    one_delay = one_delay / 1000;
+    
     watermark = dec2bin(watermark_data);
-    segment_length = round(max([zero_delay*Fs one_delay*Fs]))*5;
-    segment_transition_time = round((1/5)*segment_length);
+    segment_length = round(max([zero_delay*Fs one_delay*Fs]))*2;
+    segment_transition_time = round((1/1)*segment_length);
+    
+    bitrate = round(Fs / (segment_length + segment_transition_time));
+    length_in_s =  round(length(wav)/Fs);
+    watermark_len = (size(watermark,1) * size(watermark,2));
+    
+    if watermark_len >= length_in_s * bitrate,
+        throw( MException('EchoHider:NoSpace', 'Not enough cover audio for the given bitrate (%d b/s)\n', bitrate));
+    end
+    
+    fprintf('Attempting to embed %d bits of watermark data in %d seconds of audio (%d bits max) at %d b/s\n', watermark_len, length_in_s, length_in_s * bitrate, bitrate);
     
     one_mixer_signal = zeros(size(wav,1), 1);
     zero_mixer_signal = zeros(size(wav,1), 1);
@@ -36,20 +49,23 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
             
             one_mixer_position = one_mixer_position + segment_transition_time;
             % write the echo
-            for i=1:segment_length,
-                one_mixer_signal(one_mixer_position + i) = watermark_bit;
-            end
+            one_mixer_signal(one_mixer_position:one_mixer_position + segment_length) = watermark_bit;
             one_mixer_position = one_mixer_position + segment_length;
             last_bit = watermark_bit;
         end
     end
-
+    
     zero_mixer_signal = 1 - one_mixer_signal;
     original_mixer_signal = 1 - (zero_mixer_signal + one_mixer_signal);
+    
+    size(zero_delay_signal);
+    size(zero_mixer_signal);
     
     zero_signal = zero_delay_signal .* zero_mixer_signal;
     one_signal = one_delay_signal .* one_mixer_signal;
     original_signal = wav .* original_mixer_signal;
+    
+    plot(original_mixer_signal);
     
     processed_wave = zero_signal + one_signal + original_signal;
 end
