@@ -4,4 +4,3 @@ function [ recovered_watermark ] = detect_echo_watermark( encoded_wav, Fs )
 
 
 end
-

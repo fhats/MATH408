@@ -64,9 +64,7 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     zero_signal = zero_delay_signal .* zero_mixer_signal;
     one_signal = one_delay_signal .* one_mixer_signal;
     original_signal = wav .* original_mixer_signal;
-    
-    plot(original_mixer_signal);
-    
+
     processed_wave = zero_signal + one_signal + original_signal;
 end
 
