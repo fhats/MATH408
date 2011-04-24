@@ -24,7 +24,7 @@ def lsb_watermark(cover_filepath, watermark_data, watermarked_output_path):
     samples = struct.unpack_from ("%dh" % nframes * nchannels, frames)
 
     if len(samples) < len(watermark_bits):
-        raise OverflowError("The watermark data provided is too big to fit into the cover audio!") 
+        raise OverflowError("The watermark data provided is too big to fit into the cover audio! Tried to fit %d bits into %d bits of space." % (len(watermark_bits), len(samples))) 
     
     print "Watermarking %s (%d samples) with %d bits of information." % (cover_filepath, len(samples), len(watermark_bits))
     
@@ -84,7 +84,7 @@ def recover_lsb_watermark(watermarked_filepath):
             watermark_byte = watermark_byte + ( (sample & 1) * (2**i) )
         watermark_data.append(watermark_byte)
             
-    print struct.pack("%dB" % len(watermark_data), *watermark_data)
+    return watermark_data
     
 if __name__ == "__main__":
     message = "this is an example of steganography in audio!"
