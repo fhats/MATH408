@@ -66,5 +66,13 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     original_signal = wav .* original_mixer_signal;
 
     processed_wave = zero_signal + one_signal + original_signal;
+    
+    figure(1);
+    hold on;
+    axis([-20, length(zero_mixer_signal), -0.1, 1.1]);
+    q = plot(one_mixer_signal);
+    set(q,'Color', 'black', 'LineWidth', 2);
+    p = plot(zero_mixer_signal);
+    set(p,'Color','red','LineWidth',2);
 end
 
