@@ -2,6 +2,9 @@ function [ recovered_watermark ] = detect_echo_watermark( encoded_wav, Fs, delay
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     % divide up a signal into windows
+    delay_1 = delay_1 / 1000;
+    delay_2 = delay_2 / 1000;
+    
     nx = length(encoded_wav);                            % size of signal
     w = hamming(2000);                          % hamming window
     nw = length(w);                            % size of window
