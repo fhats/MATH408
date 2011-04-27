@@ -9,7 +9,7 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     one_delay = one_delay / 1000;
     
     watermark = dec2bin(watermark_data);
-    segment_length = round(max([zero_delay*Fs one_delay*Fs]))*2;
+    segment_length = round(Fs/32);
     segment_transition_time = round((1/1)*segment_length);
     
     bitrate = round(Fs / (segment_length + segment_transition_time));
@@ -72,7 +72,5 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     axis([-20, length(zero_mixer_signal), -0.1, 1.1]);
     q = plot(one_mixer_signal);
     set(q,'Color', 'black', 'LineWidth', 2);
-    p = plot(zero_mixer_signal);
-    set(p,'Color','red','LineWidth',2);
 end
 
