@@ -32,4 +32,6 @@ function [ recovered_watermark ] = detect_echo_watermark( encoded_wav, Fs, delay
     axis([-20, length(decision_signal), -0.1, 1.1]);
     plot(decision_signal);
     
+    
+    
 end
