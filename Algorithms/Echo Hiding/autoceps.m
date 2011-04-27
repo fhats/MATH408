@@ -4,7 +4,7 @@ function [ xhat ] = autoceps( x )
     h = fft(x);
     [ah,nd] = rcunwrap(angle(h));
     logh = log(abs(h))+i*ah;
-    logh .^ 2;
+    logh = logh .^ 2;
     xhat = real(ifft(logh));
 end
 
