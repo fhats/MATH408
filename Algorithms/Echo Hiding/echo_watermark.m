@@ -9,15 +9,16 @@ function [ processed_wave ] = echo_watermark( wav, Fs, watermark_data, zero_dela
     one_delay = one_delay / 1000;
     
     watermark = dec2bin(watermark_data);
-    segment_length = round(Fs/32);
-    segment_transition_time = round((1/1)*segment_length);
+    watermark = ['0','1','0','1','0','1','0'; watermark];
+    segment_length = round(Fs/16);
+    segment_transition_time = round(segment_length/32);
     
     bitrate = round(Fs / (segment_length + segment_transition_time));
     length_in_s =  round(length(wav)/Fs);
     watermark_len = (size(watermark,1) * size(watermark,2));
     
     if watermark_len >= length_in_s * bitrate,
-        throw( MException('EchoHider:NoSpace', 'Not enough cover audio for the given bitrate (%d b/s)\n', bitrate));
+        throw( MException('EchoHider:NoSpace', 'Not enough cover audio for the given bitrate (%d b/s, needed: %d bits, have: %d bits)\n', bitrate, watermark_len,length_in_s * bitrate));
     end
     
     fprintf('Attempting to embed %d bits of watermark data in %d seconds of audio (%d bits max) at %d b/s\n', watermark_len, length_in_s, length_in_s * bitrate, bitrate);
