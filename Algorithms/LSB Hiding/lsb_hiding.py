@@ -86,6 +86,9 @@ def recover_lsb_watermark(watermarked_filepath):
             
     return watermark_data
     
+def watermark_to_string(list):
+    return "".join([chr(x) for x in list])
+    
 if __name__ == "__main__":
     message = "this is an example of steganography in audio!"
     cover_audio = "../test_data/bach.wav"
