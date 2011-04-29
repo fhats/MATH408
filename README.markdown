@@ -29,7 +29,7 @@ _References_
 
 3.    L. Boney, A. H. Tewfik, and K. N. Hamdy, "Digital watermarks for audio signals," in _Proc. 1996 IEEE Int. Conf. Multimedia Computing and Systems_, Hiroshima, Japan, June 17-23, 1996, pp. 473-480.
 
-4.    F. Petitcolas, R. Anderson, and M. Kuhn, "Attacks on copyright marking systems," in _Information Hiding, ser. Lecture Notes in Computer Science_. Berlin, Heidelberg: Springer Berlin / Heidelberg, Nov. 1998, vol. 1525, ch. 16, pp. 218–238.
+4.    F. Petitcolas, R. Anderson, and M. Kuhn, "Attacks on copyright marking systems," in _Information Hiding, ser. Lecture Notes in Computer Science_. Berlin, Heidelberg: Springer Berlin / Heidelberg, Nov. 1998, vol. 1525, ch. 16, pp. 218-238.
 
 5.    Y. Wu, "Nonlinear Collusion Attack on a Watermarking Scheme for Buyer Authentication," in _IEEE Transactions on Multimedia_, vol. 8, no. 3, June 2006, pp. 626-629.
 
