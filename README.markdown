@@ -13,7 +13,7 @@ Case Western Reserve University
 ---------------------------------------------------
 
 This repository is a collection of algorithms accompanying my paper for MATH 408 in the spring of 2011 at Case Western Reserve University. 
-An overview of the talk given supporting the paper is available on [my website](http://fredhatfull.com/2011/04/29/how-to-watermark-audio/) and the paper itself can be downloaded [here](http://fredhatfull.com/media/talks/watermarking_audio/Watermarking%20Audio%20Data.pdf) .
+An overview of the talk given supporting the paper is available on [my website](http://fredhatfull.com/2011/04/29/how-to-watermark-audio/) and the paper itself can be downloaded [here](http://fredhatfull.com/media/talks/watermarking_audio/Watermarking%20Audio%20Data.pdf).
 Included in this collection of algorithms are implementations of an LSB hiding scheme and an echo hiding scheme. 
 
 Requirements for this software have been estimated but not explored. To run the algorithms, you'll need:
