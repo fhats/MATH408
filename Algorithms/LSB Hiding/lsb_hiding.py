@@ -88,6 +88,17 @@ def recover_lsb_watermark(watermarked_filepath):
     
 def watermark_to_string(list):
     return "".join([chr(x) for x in list])
+
+def embed_file(cover_audio, hidden_file, output):
+	f = open(hidden_file)
+	hidden_data = f.read()
+	lsb_watermark(cover_audio, hidden_data, output)
+
+def recover_embedded_file(encoded_signal, hidden_data_dest):
+	wm = recover_lsb_watermark(encoded_signal)
+	wm_str = watermark_to_string(wm)
+	f = open(hidden_data_dest,"w")
+	f.write(wm_str)
     
 if __name__ == "__main__":
     message = "this is an example of steganography in audio!"
@@ -101,4 +112,4 @@ if __name__ == "__main__":
                 output = sys.argv[3]
     lsb_watermark(cover_audio, message, output)
     
-    recover_lsb_watermark("w.wav")
+    recover_lsb_watermark(output)
